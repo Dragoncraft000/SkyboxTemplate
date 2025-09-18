@@ -1,0 +1,62 @@
+#define LEATHER_EFFECT(r, g, b) if(isLeatherColor(vec3(r, g, b)))
+
+#define MODEL_SHADER(a) if(isTextureAlpha(255 - a))
+
+#define ALPHA_EFFECT(a) if(isTextureAlpha(a))
+
+#define ALPHA_EFFECT_TWO(a,b) if(isTextureAlpha(a) || isTextureAlpha(b))
+
+#define ALPHA_EFFECT_THREE(a,b,c) if(isTextureAlpha(a) || isTextureAlpha(b) || isTextureAlpha(c))
+
+#define ALPHA_RANGE_EFFECT(a,b) if(isTextureAlphaRange(a,b))
+
+///////////////////////
+// GENERAL FUNCTIONS //
+///////////////////////
+
+bool isLeatherColor(vec3 colorToExpect) {
+	bool colorConfirmed = false;
+
+	float epsilon = 0.01;
+	if(distance(round(baseColor.rgb * 255.0), colorToExpect.rgb) < epsilon) {
+		colorConfirmed = true;
+	}
+
+	return colorConfirmed;
+}
+
+bool isTextureAlpha(float valueToExpect) {
+	bool alphaConfiemd = false;
+
+	float epsilon = 0.001;
+    float colorValue = texture(Sampler0, texCoord0*0.9999999 + vec2(0.00000005)).a * 255.;
+	if(distance(colorValue,valueToExpect) < epsilon) {
+		alphaConfiemd = true;
+	}
+
+	return alphaConfiemd;
+}
+
+bool isTextureAlphaRange(float minValueToExpect,float maxValueToExpect) {
+	bool alphaConfiemd = false;
+
+	float epsilon = 0.001;
+    float colorValue = texture(Sampler0, texCoord0*0.9999999 + vec2(0.00000005)).a * 255.;
+	if(colorValue <= maxValueToExpect && colorValue >= minValueToExpect) {
+		alphaConfiemd = true;
+	}
+
+	return alphaConfiemd;
+}
+
+///////////////////////
+//  ETXRACT DAYTIME  //
+///////////////////////
+
+float DayTime() {
+	return baseColor.r;
+}
+
+float DayTimePrecise() {
+	return (baseColor.r * 255 * 255 + baseColor.g * 255) / 24000;
+}
