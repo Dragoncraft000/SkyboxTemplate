@@ -38,3 +38,7 @@ fragColor.rgb = mix(lightColor * (sin(GameTime * 2400) * pulse +1.2),fragColor.r
 // darken the eye part
 float value2 = clamp((worldDirection.g -eyeSize) * 20,0.,20.);
 fragColor.rgb = mix(eyeColor,fragColor.rgb,1 -value2 * eyeSmoothness);
+
+// Reapply fog to no mess up underwater visuals
+// Modify Vertex Distance to account for very large model sizes (it should no fade out outside of water)
+fragColor = linear_fog(fragColor, vertexDistance * 0.25, FogStart, FogEnd, FogColor);

@@ -16,3 +16,7 @@ noiseValue = noise(worldDirection * scaling + noise(worldDirection * scaling * 2
 
 //Interpolate between the two colors based on the noise output and save the result as the output
 fragColor.rgb = mix(color1,color2,noiseValue);
+
+// Reapply fog to no mess up underwater visuals
+// Modify Vertex Distance to account for very large model sizes (it should no fade out outside of water)
+fragColor = linear_fog(fragColor, vertexDistance * 0.25, FogStart, FogEnd, FogColor);

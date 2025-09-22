@@ -51,11 +51,27 @@ void main() {
 
     MODEL_SHADER(5) {
         fragColor = mainImageOcean(worldDirection);
+        fragColor = linear_fog(fragColor, vertexDistance * 0.25, FogStart, FogEnd, FogColor);
         return;
     }
     MODEL_SHADER(6) {
         #moj_import <skyboxes/vortex.glsl>
         return;
+    }
+
+    MODEL_SHADER(9) {
+
+        // Original From https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky licensed under CC0
+        // Downscaled to reduce files size, however an 8k texture would also work
+        vec2 textureSize = vec2(1024,512);
+        
+        vec2 sphericalUV = normalToSpherical(worldDirection);
+        vec2 atlasUV = localTextureUV(textureSize,sphericalUV);
+        fragColor = texture(Sampler0,atlasUV);
+
+        fragColor.a = 1;
+        fragColor = linear_fog(fragColor, vertexDistance * 0.25, FogStart, FogEnd, FogColor);
+        return; 
     }
 
 
