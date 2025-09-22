@@ -6,5 +6,16 @@
       "max_inclusive": 61
     },
     "description": "Skybox Shader Template Resource pack"
+  },
+  "overlays": {
+    "entries": [
+      {
+        "directory": "uniformchange",
+        "formats": {
+          "max_inclusive": 69,
+          "min_inclusive": 47
+        }
+      }
+    ]
   }
 }
