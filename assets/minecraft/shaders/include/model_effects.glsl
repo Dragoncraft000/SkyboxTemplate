@@ -65,7 +65,7 @@ float DayTimePrecise() {
 //  SKYBOXE UTILITY  //
 ///////////////////////
 vec2 localTextureUV(vec2 imageSize,in vec2 localTexCoord) {
-    return texCoord0 + (imageSize / textureSize(Sampler0, 0)) * localTexCoord * 1.;
+    return floor(texCoord0 * textureSize(Sampler0, 0)) / textureSize(Sampler0, 0) + (imageSize / textureSize(Sampler0, 0)) * localTexCoord * 1.;
 }
 
 vec2 normalToSpherical(vec3 normal) {
@@ -74,6 +74,6 @@ vec2 normalToSpherical(vec3 normal) {
 
     vec2 base = vec2(planetXCoord,planetYCoord) / PI;
 
-    base = base * vec2(0.5,-1) + vec2(0,0.5);
+    base = base * vec2(0.5,-1) + vec2(0.5,0.5);
     return base;
 }
