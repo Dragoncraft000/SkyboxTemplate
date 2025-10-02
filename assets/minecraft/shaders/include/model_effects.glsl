@@ -50,7 +50,7 @@ bool isTextureAlphaRange(float minValueToExpect,float maxValueToExpect) {
 }
 
 ///////////////////////
-//  ETXRACT DAYTIME  //
+//  SKYBOXE UTILITY  //
 ///////////////////////
 
 float DayTime() {
@@ -61,9 +61,18 @@ float DayTimePrecise() {
 	return (baseColor.r * 255 * 255 + baseColor.g * 255) / 24000;
 }
 
-///////////////////////
-//  SKYBOXE UTILITY  //
-///////////////////////
+float PlayerHeight() {
+
+    int center = int(255 * 255 * 255 * 0.5);
+
+    int value = int(baseColor.r * 255 * 255 * 255 + baseColor.g * 255 * 255 + baseColor.b * 255);
+
+    float height = (value - center) * 0.01;
+
+	return height;
+}
+
+
 vec2 localTextureUV(vec2 imageSize,in vec2 localTexCoord) {
     return floor(texCoord0 * textureSize(Sampler0, 0)) / textureSize(Sampler0, 0) + (imageSize / textureSize(Sampler0, 0)) * localTexCoord * 1.;
 }
