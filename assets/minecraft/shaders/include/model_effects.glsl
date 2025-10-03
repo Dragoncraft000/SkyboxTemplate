@@ -72,6 +72,17 @@ float PlayerHeight() {
 	return height;
 }
 
+float PlayerHeightLowPrecision() {
+
+    int center = int(255 * 255 * 0.5);
+
+    int value = int(baseColor.g * 255 * 255 + baseColor.b * 255);
+
+    float height = (value - center) * 0.1;
+
+	return height;
+}
+
 
 vec2 localTextureUV(vec2 imageSize,in vec2 localTexCoord) {
     return floor(texCoord0 * textureSize(Sampler0, 0)) / textureSize(Sampler0, 0) + (imageSize / textureSize(Sampler0, 0)) * localTexCoord * 1.;
