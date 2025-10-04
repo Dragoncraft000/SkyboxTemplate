@@ -87,19 +87,19 @@ vec3 genNormalRaymarchExample(vec3 p)
 
 
 // more smooth and bright lighting
-vec3 applyLight(vec3 p,vec3 normal, vec3 input,vec3 lightPos,float ambientLight) {
+vec3 applyLight(vec3 p,vec3 normal, vec3 value,vec3 lightPos,float ambientLight) {
     vec3 l = normalize(lightPos-p);
 
     float difLight = (dot(normal,l) + 0.6) / 1.4;
     difLight = clamp(difLight,ambientLight,1.);
-    return input * difLight;
+    return value * difLight;
 }
 
 // normal light brightness based on impact angle
-vec3 applyHarshLight(vec3 p,vec3 normal, vec3 input,vec3 lightPos,float ambientLight) {
+vec3 applyHarshLight(vec3 p,vec3 normal, vec3 value,vec3 lightPos,float ambientLight) {
     vec3 l = normalize(lightPos-p);
 
     float difLight = clamp(dot(normal,l),ambientLight,1);
     difLight = clamp(difLight,ambientLight,1.);
-    return input * difLight;
+    return value * difLight;
 }
