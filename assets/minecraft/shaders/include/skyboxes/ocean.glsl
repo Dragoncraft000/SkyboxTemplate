@@ -130,7 +130,7 @@ vec3 extra_cheap_atmosphereOcean(vec3 raydir, vec3 sundir) {
 // Calculate where the sun should be, it will be moving around the sky
 vec3 getSunOceanDirectionOcean() {
     vec3 up = vec3(0,10,0);
-    up.xy *= rot2D((DayTimePrecise() - 0.25) * 2 * PI);
+    up.xy *= rot2D((DayTime() - 0.25) * 2 * PI);
     return normalize(up);
 }
 

@@ -54,11 +54,11 @@ bool isTextureAlphaRange(float minValueToExpect,float maxValueToExpect) {
 ///////////////////////
 
 float DayTime() {
-	return baseColor.r;
+	return (baseColor.r * 255 * 255 + baseColor.g * 255) / 24000;
 }
 
-float DayTimePrecise() {
-	return (baseColor.r * 255 * 255 + baseColor.g * 255) / 24000;
+float DayTimeLowPrecision() {
+	return baseColor.r;
 }
 
 float PlayerHeight() {
