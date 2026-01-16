@@ -21,8 +21,7 @@ skyboxRegistry:
     skyboxId: skyboxengine:model_shader_4
   ocean:
     skyboxId: skyboxengine:model_shader_5
-    flags:
-      encodePreciseTime: true
+    tintProvider: daytime
   vortex:
     skyboxId: skyboxengine:model_shader_6
   texture:
